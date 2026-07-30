@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>طفّيها — الإبلاغ عن الحرائق في الجزائر</title>
+  <link rel="shortcut icon" href="favicon-mini-square.png" type="image/x-icon">
+  <meta name="description" content="منصة لتمكين المواطنين الجزائريين من الإبلاغ الفوري عن الحرائق والحوادث الطارئة دون الحاجة إلى إنشاء حساب." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+
+  <!-- Emergency numbers banner -->
+  <div class="emergency-banner" role="alert">
+    <div class="container">
+      <svg class="icon" href viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2L2 21H22L12 2Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M12 9V13" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="12" cy="16.5" r="0.9" fill="#fff"/>
+      </svg>
+      <span>منصة طفّيها لا تغني عن الاتصال بالحماية المدنية ، في حالة وجود خطر اتصل فورًا بالرقم <strong>14</strong> (الحماية المدنية) قبل إرسال البلاغ عبر الموقع.</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <img src="favicon-mini-square.png" alt="">
+          </svg>
+        </span>
+        <span class="brand-text">
+          <h1>طفّيها</h1>
+          <span>منصة للإبلاغ عن حوادث الحريق الطارئة في مختلف ربوع الوطن</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-links">
+          <li><a href="index.html" aria-current="page">الرئيسية</a></li>
+          <li><a href="#how-it-works">كيف يعمل الموقع</a></li>
+          <li><a href="#recent-incidents">آخر البلاغات</a></li>
+          <li><a href="#statistics">الإحصائيات</a></li>
+        </ul>
+        <a href="addincident.html" class="btn btn-primary nav-cta">الإبلاغ عن حريق</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow">منصة للإبلاغ الطارئ عند وقوع حريق</span>
+          <h2>بلّغ عن حريق في منطقتك بسرعة و سهولة</h2>
+          <p>
+            طفّيها منصة تتيح لكل مواطن إرسال بلاغ فوري عند اندلاع حريق بهدف جلب مساعدة مصالح الحماية المدنية والجهات المعنية والمتطوعين و التدخل بأسرع وقت ممكن.
+          </p>
+          <ul class="hero-points">
+            <li><span class="dot" aria-hidden="true"></span> لا حاجة لإنشاء حساب أو تسجيل دخول</li>
+            <li><span class="dot" aria-hidden="true"></span> إرسال البلاغ مع الموقع الجغرافي الدقيق</li>
+          </ul>
+          <div class="hero-actions">
+            <a href="addincident.html" class="btn btn-primary btn-lg">الإبلاغ عن حريق الآن</a>
+            <a href="#how-it-works" class="btn btn-outline btn-lg">كيف يعمل الموقع؟</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <img src="favicon-2.png" class="icon" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">آلية العمل</span>
+          <h2>كيف يعمل الموقع؟</h2>
+          <p>ثلاث خطوات بسيطة تفصلك عن إرسال بلاغ يصل مباشرة إلى الجهات المعنية.</p>
+        </div>
+        <div class="steps">
+          <article class="step-card">
+            <span class="step-number">1</span>
+            <h3>صف الحادثة</h3>
+            <p>اختر الولاية والبلدية، وحدّد درجة خطورة الحريق، والخدمات التي تحتاجها في مكان الحريق.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">2</span>
+            <h3>أرسل البلاغ فورًا</h3>
+            <p>أرفق الموقع الجغرافي ثم أرسل البلاغ دون الحاجة إلى أي تسجيل.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">3</span>
+            <h3>تدخل سريع</h3>
+            <p>يتم نشر البلاغ مباشرة في المنصة كي يتسنى للجهات المعنية والمتطوعين القريبين الاستجابة والتدخل.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent incidents -->
+    <section class="section section--muted" id="recent-incidents">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">بيانات حية</span>
+          <h2>آخر البلاغات</h2>
+          <p>قائمة بالبلاغات الواردة مؤخرًا عبر المنصة، مع إمكانية التصفية حسب الولاية والبلدية ودرجة الخطورة.</p>
+        </div>
+
+        <form class="filters" id="filtersForm" aria-label="تصفية البلاغات">
+          <div class="filters-grid">
+            <div class="field">
+              <label for="filterWilaya">الولاية</label>
+              <select id="filterWilaya" name="wilaya">
+                <option value="">كل الولايات</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filterCommune">البلدية</label>
+              <select id="filterCommune" name="commune" disabled>
+                <option value="">اختر الولاية أولاً</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filterSeverity">درجة الخطورة</label>
+              <select id="filterSeverity" name="severity">
+                <option value="">كل الدرجات</option>
+                <option value="حريق صغير">حريق صغير</option>
+                <option value="بدأ يخرج عن السيطرة">بدأ يخرج عن السيطرة</option>
+                <option value="خارج عن السيطرة">خارج عن السيطرة</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="filterService">الخدمة المطلوبة</label>
+              <select id="filterService" name="service">
+                <option value="">كل الخدمات</option>
+                <option value="الحماية المدنية">الحماية المدنية</option>
+                <option value="الدرك الوطني">الدرك الوطني</option>
+                <option value="الشرطة">الشرطة</option>
+                <option value="الإسعاف">الإسعاف</option>
+                <option value="المواطنون">المواطنون</option>
+                <option value="الأطباء البيطريون">الأطباء البيطريون</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="visually-hidden" for="filterSubmit">بحث</label>
+              <button type="submit" id="filterSubmit" class="btn btn-secondary">بحث</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="incident-toolbar">
+          <p class="result-count" id="resultCount" aria-live="polite">جارٍ تحميل البلاغات...</p>
+        </div>
+
+        <div class="incident-grid" id="incidentGrid" aria-live="polite">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="section" id="statistics">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">لمحة سريعة</span>
+          <h2>الإحصائيات</h2>
+          <p>أرقام محدثة آليًا استنادًا إلى البلاغات المسجّلة عبر المنصة.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="statTotal">—</div>
+            <div class="stat-label">إجمالي البلاغات</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statToday">—</div>
+            <div class="stat-label">بلاغات اليوم</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="statCritical">—</div>
+            <div class="stat-label">حرائق خارجة عن السيطرة</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Incident details modal -->
+  <div class="modal-overlay" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="detailsModalTitle">تفاصيل البلاغ</h3>
+        <button type="button" class="modal-close" data-close-modal aria-label="إغلاق">✕</button>
+      </div>
+      <div id="detailsModalBody"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img width="80" src="favicon-2.png" alt="">
+          <p>
+            منصة تهدف إلى تسريع الإبلاغ عن الحرائق الطارئة عبر التراب الوطني،
+            ودعم التنسيق بين المواطنين والجهات المعنية والمتطوعين.
+          </p>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="addincident.html">الإبلاغ عن حريق</a></li>
+            <li><a href="#how-it-works">كيف يعمل الموقع</a></li>
+            <li><a href="#statistics">الإحصائيات</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>أرقام الطوارئ</h4>
+          <ul class="emergency-list">
+            <li><span>الحماية المدنية</span><strong>14</strong></li>
+            <li><span>الشرطة</span><strong>17</strong></li>
+            <li><span>الدرك الوطني</span><strong>1055</strong></li>
+            <li><span>الرقم الأخضر</span><strong>1548</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 طفّيها</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

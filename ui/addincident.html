@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>طفّيها — الإبلاغ عن الحرائق في الجزائر</title>
+  <link rel="shortcut icon" href="favicon-mini-square.png" type="image/x-icon">
+  <meta name="description" content="أرسل بلاغًا فوريًا عن حريق أو حادث طارئ مع الموقع الجغرافي الدقيق دون الحاجة إلى إنشاء حساب." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet (open-source map library, no API key required) for the map picker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+
+  <div class="emergency-banner" role="alert">
+    <div class="container">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2L2 21H22L12 2Z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M12 9V13" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="12" cy="16.5" r="0.9" fill="#fff"/>
+      </svg>
+      <span>منصة طفّيها لا تغني عن الاتصال بالحماية المدنية ، في حالة وجود خطر اتصل فورًا بالرقم <strong>14</strong> (الحماية المدنية) قبل إرسال البلاغ عبر الموقع.</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <img src="favicon-mini-square.png" alt="">
+          </svg>
+        </span>
+        <span class="brand-text">
+          <h1>طفّيها</h1>
+          <span>منصة للإبلاغ عن حوادث الحريق الطارئة في مختلف ربوع الوطن</span>
+        </span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="index.html#how-it-works">كيف يعمل الموقع</a></li>
+          <li><a href="index.html#recent-incidents">آخر البلاغات</a></li>
+          <li><a href="index.html#statistics">الإحصائيات</a></li>
+        </ul>
+        <a href="addincident.html" class="btn btn-primary nav-cta" aria-current="page">الإبلاغ عن حريق</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="form-page-header">
+      <div class="container">
+        <h2>الإبلاغ عن حريق</h2>
+        <p>جميع الحقول المعلّمة بـ (*) إلزامية. لا حاجة لإنشاء حساب لإرسال البلاغ.</p>
+      </div>
+    </div>
+
+    <section class="section--tight">
+      <div class="container">
+        <form class="report-form" id="incidentForm" novalidate>
+          <div id="formMessage" class="form-message" role="alert"></div>
+
+          <!-- Location -->
+          <div class="form-section">
+            <h3>الموقع</h3>
+            <p class="form-section-desc">حدّد الولاية والبلدية التي وقع بها الحريق.</p>
+            <div class="form-row">
+              <div class="field">
+                <label for="wilaya">الولاية *</label>
+                <select id="wilaya" name="wilaya" required aria-describedby="wilayaError">
+                  <option value="">اختر الولاية</option>
+                </select>
+                <span class="error-text" id="wilayaError"></span>
+              </div>
+              <div class="field">
+                <label for="commune">البلدية *</label>
+                <select id="commune" name="commune" required disabled aria-describedby="communeError">
+                  <option value="">اختر الولاية أولاً</option>
+                </select>
+                <span class="error-text" id="communeError"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Severity -->
+          <div class="form-section">
+            <h3>درجة خطورة الحريق</h3>
+            <p class="form-section-desc">اختر الوصف الأقرب للوضع الحالي في مكان الحريق.</p>
+            <div class="field">
+              <label for="severity">درجة الخطورة *</label>
+              <select id="severity" name="severity" required aria-describedby="severityError">
+                <option value="">اختر درجة الخطورة</option>
+                <option value="حريق صغير">حريق صغير</option>
+                <option value="بدأ يخرج عن السيطرة">بدأ يخرج عن السيطرة</option>
+                <option value="خارج عن السيطرة">خارج عن السيطرة</option>
+              </select>
+              <span class="error-text" id="severityError"></span>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div class="form-section">
+            <h3>الخدمات المطلوبة</h3>
+            <p class="form-section-desc">اختر جهة واحدة أو أكثر تحتاج إلى التدخل في مكان الحريق.</p>
+            <fieldset>
+              <legend class="visually-hidden">الخدمات المطلوبة</legend>
+              <div class="checkbox-grid">
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="الحماية المدنية" />
+                  الحماية المدنية
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="الدرك الوطني" />
+                  الدرك الوطني
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="الشرطة" />
+                  الشرطة
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="الإسعاف" />
+                  الإسعاف
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="المواطنون" />
+                  المواطنون
+                </label>
+                <label class="checkbox-item">
+                  <input type="checkbox" name="services" value="الأطباء البيطريون" />
+                  الأطباء البيطريون
+                </label>
+              </div>
+            </fieldset>
+            <span class="error-text" id="servicesError"></span>
+          </div>
+
+          <!-- Notes -->
+          <div class="form-section">
+            <h3>تفاصيل إضافية</h3>
+            <div class="field">
+              <label for="notes">ملاحظات</label>
+              <textarea id="notes" name="notes" placeholder="اكتب تفاصيل إضافية أو ما يحتاجه المتضررون..."></textarea>
+            </div>
+          </div>
+
+          <!-- Location on map -->
+          <div class="form-section">
+            <h3>الموقع الجغرافي الدقيق</h3>
+            <p class="form-section-desc">استخدم موقعك الحالي أو اختر النقطة على الخريطة لتحديد مكان الحريق بدقة.</p>
+            <div class="location-actions">
+              <button type="button" class="btn btn-outline" id="useCurrentLocationBtn">
+                <span class="spinner spinner--dark" id="locationSpinner" hidden></span>
+                استخدام الموقع الحالي
+              </button>
+              <button type="button" class="btn btn-outline" id="chooseOnMapBtn">اختيار من الخريطة</button>
+            </div>
+            <div class="location-result" id="locationResult"></div>
+            <span class="error-text" id="locationError"></span>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBtn">
+              <span class="spinner" id="submitSpinner" hidden></span>
+              <span id="submitLabel">إرسال البلاغ</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Map picker modal -->
+  <div class="modal-overlay modal--map" id="mapModal" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="mapModalTitle">اختيار الموقع على الخريطة</h3>
+        <button type="button" class="modal-close" data-close-modal aria-label="إغلاق">✕</button>
+      </div>
+      <div id="map-picker"></div>
+      <p class="map-coords" id="mapCoordsLabel">اضغط على الخريطة لتحديد موقع الحريق بدقة.</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close-modal>إلغاء</button>
+        <button type="button" class="btn btn-primary" id="confirmMapLocation">تأكيد الموقع</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img width="80" src="favicon-2.png" alt="">
+          <p>
+            منصة تهدف إلى تسريع الإبلاغ عن الحرائق الطارئة عبر التراب الوطني،
+            ودعم التنسيق بين المواطنين والجهات المعنية والمتطوعين.
+          </p>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="addincident.html">الإبلاغ عن حريق</a></li>
+            <li><a href="index.html#statistics">الإحصائيات</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>أرقام الطوارئ</h4>
+          <ul class="emergency-list">
+            <li><span>الحماية المدنية</span><strong>14</strong></li>
+            <li><span>الشرطة</span><strong>17</strong></li>
+            <li><span>الدرك الوطني</span><strong>1055</strong></li>
+            <li><span>الرقم الأخضر</span><strong>1548</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 طفّيها</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet JS (open-source, no API key needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

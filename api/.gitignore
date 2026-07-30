@@ -1,0 +1,8 @@
+bin/
+obj/
+.vs/
+
+# Local secrets — never commit real connection strings
+appsettings.Development.json
+appsettings.Local.json
+*.user
