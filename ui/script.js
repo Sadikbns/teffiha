@@ -375,6 +375,112 @@ function escapeHtml(value) {
 }
 
 /* ---------------------------------------------------------
+   4.1 نافذة إشعار صغيرة منبثقة (Toast) — بدون أي مكتبات خارجية
+   تُستخدم لإعلام المستخدم بنجاح إرسال البلاغ أو بحدوث خطأ.
+   التنسيقات مُضمّنة هنا مباشرة عبر <style> بحيث لا حاجة لتعديل style.css.
+   --------------------------------------------------------- */
+function ensureToastContainer() {
+  let container = document.getElementById("toastContainer");
+  if (container) return container;
+
+  if (!document.getElementById("toastStyles")) {
+    const style = document.createElement("style");
+    style.id = "toastStyles";
+    style.textContent = `
+      #toastContainer {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: min(92vw, 380px);
+        pointer-events: none;
+      }
+      #toastContainer .toast {
+        pointer-events: auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px 16px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 0.92rem;
+        line-height: 1.5;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+        animation: toast-in 0.25s ease-out;
+        direction: rtl;
+        text-align: right;
+      }
+      #toastContainer .toast--success { background: #1f9d55; }
+      #toastContainer .toast--error { background: #d64545; }
+      #toastContainer .toast.is-leaving { animation: toast-out 0.2s ease-in forwards; }
+      #toastContainer .toast-close {
+        margin-inline-start: auto;
+        background: none;
+        border: none;
+        color: inherit;
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0.85;
+        padding: 0;
+      }
+      #toastContainer .toast-close:hover { opacity: 1; }
+      @keyframes toast-in {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes toast-out {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(-10px); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  container = document.createElement("div");
+  container.id = "toastContainer";
+  container.setAttribute("aria-live", "polite");
+  document.body.appendChild(container);
+  return container;
+}
+
+function showToast(message, type = "success", duration = 5000) {
+  const container = ensureToastContainer();
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast--${type}`;
+  toast.setAttribute("role", type === "error" ? "alert" : "status");
+
+  const text = document.createElement("span");
+  text.textContent = message;
+  toast.appendChild(text);
+
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "toast-close";
+  closeBtn.setAttribute("aria-label", "إغلاق الإشعار");
+  closeBtn.textContent = "✕";
+  toast.appendChild(closeBtn);
+
+  let timer;
+  const remove = () => {
+    clearTimeout(timer);
+    toast.classList.add("is-leaving");
+    toast.addEventListener("animationend", () => toast.remove(), { once: true });
+  };
+
+  closeBtn.addEventListener("click", remove);
+  timer = setTimeout(remove, duration);
+
+  container.appendChild(toast);
+}
+
+/* ---------------------------------------------------------
    5. صفحة الإبلاغ عن حادث
    --------------------------------------------------------- */
 
@@ -516,7 +622,10 @@ function initFormSubmit(form, state) {
     clearErrors();
 
     const isValid = validateForm();
-    if (!isValid) return;
+    if (!isValid) {
+      showToast("يرجى تصحيح الأخطاء في النموذج قبل الإرسال.", "error");
+      return;
+    }
 
     setSubmitting(true);
     formMessage.className = "form-message";
@@ -536,6 +645,7 @@ function initFormSubmit(form, state) {
 
       formMessage.textContent = "تم إرسال البلاغ بنجاح. شكرًا لمساهمتك في حماية المجتمع.";
       formMessage.classList.add("success", "is-visible");
+      showToast("تم إرسال البلاغ بنجاح. شكرًا لمساهمتك في حماية المجتمع.", "success");
       form.reset();
       fillCommuneSelect(qs("#commune"), "");
       state.latitude = null;
@@ -544,6 +654,7 @@ function initFormSubmit(form, state) {
     } catch (error) {
       formMessage.textContent = `تعذّر إرسال البلاغ: ${escapeHtml(error.message)}. يرجى التحقق من الاتصال والمحاولة مجددًا.`;
       formMessage.classList.add("error", "is-visible");
+      showToast(`تعذّر إرسال البلاغ: ${error.message}`, "error");
     } finally {
       setSubmitting(false);
     }
