@@ -33,8 +33,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
                 "http://localhost:5500",   // e.g. VS Code "Live Server" extension
-                //"https://teffiha.com",
-                "https://teffiha.sadikbensadi7.workers.dev"
+                "https://teffiha.com"
                 // //PROD: replace the two localhost origins above with your real
                 // deployed frontend domain, e.g. "https://balagh-algerie.example"
             )
