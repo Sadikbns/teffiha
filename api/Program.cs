@@ -148,7 +148,7 @@ app.MapGet("/incidents", async (short? wilaya, string? commune, string? severity
         }
     }
 
-    // //PROD: add real pagination (LIMIT/OFFSET or keyset) once the table grows large.
+    // : add real pagination (LIMIT/OFFSET or keyset) once the table grows large.
     sql += " ORDER BY i.created_at DESC LIMIT 200";
 
     await using var conn = new NpgsqlConnection(connectionString);

@@ -694,10 +694,10 @@ function initFormSubmit(form, state) {
       qs("#servicesError").textContent = "يرجى اختيار خدمة واحدة على الأقل.";
       valid = false;
     }
-    if (state.latitude === null || state.longitude === null) {
-      qs("#locationError").textContent = "يرجى تحديد الموقع الجغرافي للحادثة.";
-      valid = false;
-    }
+    // if (state.latitude === null || state.longitude === null) {
+    //   qs("#locationError").textContent = "يرجى تحديد الموقع الجغرافي للحادثة.";
+    //   valid = false;
+    // }
 
     return valid;
   }
